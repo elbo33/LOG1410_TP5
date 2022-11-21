@@ -17,7 +17,10 @@ class Agenda : public AbsDocument
 {
 public:
 	Agenda(std::string name, std::string dateTime);
-	virtual ~Agenda() {}
+
+    Agenda(std::string name, std::string dateTime, const char *string, const char *string1, int i, float d);
+
+    virtual ~Agenda() {}
 	virtual Agenda* clone(void) const;
 
 	std::string getDescription() const { return descriptionAgenda; }

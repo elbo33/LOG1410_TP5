@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 
 #include "Directory.h"
 #include "AbsDocument.h"
@@ -16,8 +17,8 @@ Directory::Directory(const Directory& mdd)
 	// À compléter pour copier tous les éléments contenus dans le répertoire
 	for (const std::unique_ptr<class AbsDirectoryComponent>& element : mdd.m_documents) {
 		AbsDirectoryComponent* newElement = element.get()->clone();
-		DirectoryComponentPtr newElementPtr = std::make_unique<AbsDirectoryComponent>(*newElement);
-		m_documents.push_back(newElementPtr);
+        DirectoryComponentPtr newElementPtr = std::unique_ptr<AbsDirectoryComponent>(newElement);
+		m_documents.push_back(std::move(newElementPtr));
 	}
 }
 
@@ -33,8 +34,8 @@ AbsDirectoryComponent& Directory::addDirectoryComponent(const AbsDirectoryCompon
 	// et l'insérer dans le conteneur de documents. On retourne une référence à l'objet
 	// qui vient d'être inséré dans le conteneur.
 	AbsDirectoryComponent* newElement = member.clone();
-	DirectoryComponentPtr newElementPtr = std::make_unique<AbsDirectoryComponent>(*newElement);
-	m_documents.push_back(newElementPtr);
+	DirectoryComponentPtr newElementPtr(newElement);
+	m_documents.push_back(std::move(newElementPtr));
 	AbsDirectoryComponent& Element = *newElement;
 	return Element;
 }
@@ -84,16 +85,10 @@ const AbsDocument* Directory::findDocument(std::string productName) const
 	// À compléter pour itérer sur les éléments contenus dans le répertoire à la recherche d'un document
 	// portant le nom reçu en argument. Si aucun document n'est trouvé, on retourne nullptr
 	const AbsDocument* foundDocument = nullptr;
-	
-	// À compléter
 
-	for (const auto& element : m_documents) {
-		if (element->getName() == productName) {
-			AbsDirectoryComponent& elementTrouve = *(element.get()->clone());
-			foundDocument = elementTrouve;
-		}
-	}
-	
+    for(const auto& element: m_documents) {
+        foundDocument = dynamic_cast<AbsDocument *>(element->clone());
+    }
 	return foundDocument;
 }
 
@@ -102,7 +97,14 @@ std::ostream& Directory::printToStream(std::ostream& o) const
 	// À compléter pour imprimer sur un stream une catégorie et son contenu
 
 	for (auto& element : m_documents) {
-		o << element.get();
+		o << "Directory: " << element->getName() << std::endl;
+        DirectoryComponentIterator directoryComponentIteratorBegin = element->begin();
+        DirectoryComponentIterator directoryComponentIteratorEnd = element->end();
+        for (auto dci = directoryComponentIteratorBegin; dci != directoryComponentIteratorEnd; dci++) {
+            o << "    " <<  *dci << std::endl;
+        }
+        o << std::endl;
+
 	}
 	return o;
 }

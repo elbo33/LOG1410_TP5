@@ -17,10 +17,11 @@ Instance::Instance(const Instance& mdd)
 {
 	// À compléter pour copier toutes les instances de niveau inférieur contenues dans l'instance}
 	for (const std::unique_ptr<class AbsInstanceComponent>& element : mdd.m_instanceContainer) {
-		AbsInstanceComponent* newElement = element.get()->clone();
-		InstanceComponentPtr newElementPtr = std::make_unique<AbsInstanceComponent>(*newElement);
-		m_instanceContainer.push_back(newElementPtr);
+		AbsInstanceComponent* newElement = element->clone();
+		InstanceComponentPtr newElementPtr = std::unique_ptr<AbsInstanceComponent>(newElement);
+        m_instanceContainer.push_back(std::move(newElementPtr));
 	}
+
 }
 
 Instance* Instance::clone() const
@@ -59,8 +60,8 @@ AbsInstanceComponent& Instance::addInstanceComponent(const AbsInstanceComponent&
 	// qui vient d'être inséré dans le conteneur.
 
 	AbsInstanceComponent* newElement = member.clone();
-	InstanceComponentPtr newElementPtr = std::make_unique<AbsInstanceComponent>(*newElement);
-	m_instanceContainer.push_back(newElementPtr);
+	InstanceComponentPtr newElementPtr = std::unique_ptr<AbsInstanceComponent>(newElement);
+	m_instanceContainer.push_back(std::move(newElementPtr));
 	AbsInstanceComponent& Element = *newElement;
 	return Element;
 }
@@ -88,9 +89,14 @@ void Instance::deleteAllComponents(void)
 std::ostream& Instance::printToStream(std::ostream& o) const
 {
 	// À compléter pour imprimer sur un stream une instance et ses éléments
-	for (auto& element : m_instanceContainer) {
-		o << element.get();
-	}
+    int i(1);
+    for(auto& element : m_instanceContainer) {
+        auto* artifactPtr = dynamic_cast<Artifact*>(element.get());
+        o << i << " " << (artifactPtr != nullptr ? "Artifact: " + artifactPtr->getName() : element->getName()) << std::endl;
+        i++;
+    }
+
+
 	return o;
 }
 
