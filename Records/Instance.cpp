@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 #include "Instance.h"
+#include "Directory.h"
 
 Instance::Instance(std::string name)
     : AbsInstanceComponent(name)
@@ -86,15 +87,24 @@ void Instance::deleteAllComponents(void)
 	}
 }
 
-std::ostream& Instance::printToStream(std::ostream& o) const
+std::ostream& Instance::printToStream(std::ostream& o) const // TODO Faire en sorte que ca indent correctement
 {
-	// À compléter pour imprimer sur un stream une instance et ses éléments
+    o << this->getName() << std::endl;
     int i(1);
     for(auto& element : m_instanceContainer) {
         auto* artifactPtr = dynamic_cast<Artifact*>(element.get());
-        o << i << " " << (artifactPtr != nullptr ? "Artifact: " + artifactPtr->getName() : element->getName()) << std::endl;
+        auto* instancePtr = dynamic_cast<Instance*>(element.get());
+
+        if(artifactPtr != nullptr) {
+            o << i << " Artifact: " << artifactPtr->getName() << std::endl;
+            o << "    --> Document: " << artifactPtr->getDocument().getName() << std::endl;
+        } else if(instancePtr != nullptr) {
+            o << i << " ";
+            instancePtr->printToStream(o);
+        }
         i++;
     }
+
 
 
 	return o;

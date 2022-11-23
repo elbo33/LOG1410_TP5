@@ -15,7 +15,6 @@ GenericDocument* GenericDocument::clone() const
 
 GenericDocument::GenericDocument(std::string name, std::string dateTime, const char *string, const char *string1,
                                  int i, float d) : AbsDocument(std::move(name), std::move(dateTime)) {
-    // TODO implement GenericDocument constructor
 }
 
 
