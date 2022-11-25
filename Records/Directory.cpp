@@ -16,7 +16,7 @@ Directory::Directory(const Directory& mdd)
 {
 	// À compléter pour copier tous les éléments contenus dans le répertoire
 	for (const std::unique_ptr<class AbsDirectoryComponent>& element : mdd.m_documents) {
-		AbsDirectoryComponent* newElement = element.get()->clone();
+		AbsDirectoryComponent* newElement = element->clone();
         DirectoryComponentPtr newElementPtr = std::unique_ptr<AbsDirectoryComponent>(newElement);
 		m_documents.push_back(std::move(newElementPtr));
 	}
