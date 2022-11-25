@@ -16,8 +16,7 @@ class GenericDocument : public AbsDocument
 public:
 	GenericDocument(std::string name, std::string dateTime, std::string description);
 
-    GenericDocument(std::string name, std::string dateTime, const char *string, const char *string1,
-                    int i, float d);
+    GenericDocument(std::string name, std::string dateTime;
 
     virtual ~GenericDocument() {}
 	virtual GenericDocument* clone(void) const;
