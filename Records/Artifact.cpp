@@ -7,8 +7,10 @@
 
 #include "Artifact.h"
 
+#include <utility>
+
 Artifact::Artifact(std::string name, const AbsDirectoryComponent& document)
-	: AbsInstanceComponent(name), m_document(document)
+	: AbsInstanceComponent(std::move(name)), m_document(document)
 {
 }
 
@@ -26,7 +28,7 @@ const AbsDirectoryComponent& Artifact::getDocument() const
 std::ostream& Artifact::printToStream(std::ostream& o) const
 {
 	// À compléter pour imprimer sur un stream le nom de l'artefact ainsi que le nom du document qui y est reference.
-	o << this->getName() << " " << this->getDocument().getName();
+    o << this->getName() << " " << this->getDocument().getName();
 	return o;
 }
 

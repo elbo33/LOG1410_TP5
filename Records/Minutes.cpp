@@ -1,9 +1,10 @@
 #include <string>
+#include <utility>
 
 #include "Minutes.h"
 
 Minutes::Minutes(std::string name, std::string dateTime)
-	: AbsDocument(name, dateTime)
+	: AbsDocument(std::move(name), std::move(dateTime))
 {
 }
 

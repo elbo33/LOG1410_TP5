@@ -2,8 +2,10 @@
 
 #include "GenericDocument.h"
 
+#include <utility>
+
 GenericDocument::GenericDocument(std::string name, std::string dateTime, std::string description)
-	:AbsDocument(name, dateTime), m_description(description)
+	:AbsDocument(std::move(name), std::move(dateTime)), m_description(std::move(description))
 {
 }
 
