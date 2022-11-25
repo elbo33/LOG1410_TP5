@@ -97,22 +97,19 @@ std::ostream& Instance::printToStream(std::ostream& o) const
         auto* artifactPtr = dynamic_cast<Artifact*>(element.get());
         auto* instancePtr = dynamic_cast<Instance*>(element.get());
 
+        m_indent++;
         if(artifactPtr != nullptr) {
-            m_indent++;
             indent(o);
             o << i << " Artifact: " << artifactPtr->getName() << std::endl;
             indent(o);
             o << "    --> Document: " << artifactPtr->getDocument().getName() << std::endl;
-            m_indent--;
 
         } else if(instancePtr != nullptr) {
-
-            m_indent++;
             indent(o);
             o << i << " ";
             instancePtr->printToStream(o);
-            m_indent--;
         }
+        m_indent--;
         i++;
     }
 
