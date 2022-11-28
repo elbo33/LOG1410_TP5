@@ -10,11 +10,10 @@
 
 #include <memory>
 #include <list>
-#include <vector>
 
 // Configuration du stockage des enfants des objets composites
 using DirectoryComponentPtr = std::unique_ptr<class AbsDirectoryComponent>;
-using DirectoryComponentContainer = std::vector<DirectoryComponentPtr>;
+using DirectoryComponentContainer = std::list<DirectoryComponentPtr>;
 using DirectoryComponentBaseIterator = DirectoryComponentContainer::iterator;
 using DirectoryComponentBaseIterator_const = DirectoryComponentContainer::const_iterator;
 

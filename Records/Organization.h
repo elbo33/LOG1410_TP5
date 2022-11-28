@@ -15,6 +15,8 @@
 #include "Minutes.h"
 #include "GenericDocument.h"
 #include "Artifact.h"
+#include "AddAnnotationVisitor.h"
+#include "AnnotationDecorator.h"
 
 class Organization
 {

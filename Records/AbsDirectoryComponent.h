@@ -18,6 +18,7 @@ class AbsDirectoryComponent
 public:
 	AbsDirectoryComponent(std::string name) : m_name(name) {};
 	virtual AbsDirectoryComponent* clone(void) const = 0;
+	virtual AbsDirectoryComponent& accept(class AddAnnotationVisitor& v) const = 0;
 
 	virtual std::string getName(void) const { return m_name; };
 	virtual void setName(std::string name) { m_name = name; };
