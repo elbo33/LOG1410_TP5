@@ -18,6 +18,8 @@ class Minutes : public AbsDocument
 public:
 	Minutes(std::string name, std::string dateTime);
 
+    Minutes(std::string name, std::string dateTime, const char *string, const char *string1, int i, float d);
+
     virtual ~Minutes() {}
 	virtual Minutes* clone(void) const;
 

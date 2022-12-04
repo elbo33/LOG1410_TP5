@@ -14,3 +14,7 @@ Agenda* Agenda::clone(void) const
 	
 	return new Agenda(*this); // À remplacer
 }
+
+Agenda::Agenda(std::string name, std::string dateTime, const char *agendaName, const char *string1, int i, float d)
+        : AbsDocument(std::move(name), std::move(dateTime)) {
+}
