@@ -19,7 +19,7 @@ int main()
         else
             std::cout << "Pas d'instance du CA trouvee, veuillez verifier votre recherche." << std::endl;
 
-
+        
         std::cout << "------------------------------" << std::endl;
         std::cout << "Impression de la structure des instances et des documents qui y sont references: " << std::endl << log1410Instances << std::endl;
     }

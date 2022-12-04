@@ -17,10 +17,9 @@ class Agenda : public AbsDocument
 {
 public:
 	Agenda(std::string name, std::string dateTime);
-
-
-    virtual ~Agenda() {}
+	virtual ~Agenda() {}
 	virtual Agenda* clone(void) const;
+	AbsDirectoryComponent& accept(AddAnnotationVisitor& v) const;
 
 	std::string getDescription() const { return descriptionAgenda; }
 };

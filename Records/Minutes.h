@@ -17,9 +17,9 @@ class Minutes : public AbsDocument
 {
 public:
 	Minutes(std::string name, std::string dateTime);
-
-    virtual ~Minutes() {}
+	virtual ~Minutes() {}
 	virtual Minutes* clone(void) const;
+	AbsDirectoryComponent& accept(AddAnnotationVisitor& v) const;
 
 	std::string getDescription() const { return descriptionMinutes; }
 };

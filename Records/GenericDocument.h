@@ -15,11 +15,9 @@ class GenericDocument : public AbsDocument
 {
 public:
 	GenericDocument(std::string name, std::string dateTime, std::string description);
-
-    GenericDocument(std::string name, std::string dateTime;
-
-    virtual ~GenericDocument() {}
+	virtual ~GenericDocument() {}
 	virtual GenericDocument* clone(void) const;
+	AbsDirectoryComponent& accept(AddAnnotationVisitor& v) const;
 
 	std::string getDescription() const { return m_description; }
 

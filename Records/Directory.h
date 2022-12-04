@@ -9,7 +9,6 @@
 #ifndef _Directory_Header_
 #define _Directory_Header_
 
-//#include "AbsDirectoryComponent.h"
 #include "AbsDocument.h"
 
 class Directory : public AbsDirectoryComponent
@@ -18,6 +17,7 @@ public:
 	Directory(std::string name);
 	Directory(const Directory& mdd);
 	virtual Directory* clone(void) const;
+	AbsDirectoryComponent& accept(AddAnnotationVisitor& v) const;
 
 	virtual AbsDirectoryComponent& addDirectoryComponent(const AbsDirectoryComponent& member);
 	virtual DirectoryComponentIterator begin();

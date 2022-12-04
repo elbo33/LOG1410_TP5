@@ -19,6 +19,8 @@ public:
 	virtual ~Artifact() = default;
 	Artifact* clone() const override;
 
+	virtual void accept(class AbsInstanceVisitor& v);
+
 	virtual const AbsDirectoryComponent& getDocument() const;
 	
 protected:
