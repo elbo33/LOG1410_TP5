@@ -22,8 +22,6 @@ public:
 	virtual ~AbsInstanceComponent() = default;
 	virtual AbsInstanceComponent* clone() const = 0;
 
-	virtual void accept(class AbsInstanceVisitor& v) = 0;
-
 	virtual AbsInstanceComponent& addInstanceComponent(const AbsInstanceComponent& member);
 	virtual InstanceComponentIterator begin();
 	virtual InstanceComponentIterator_const cbegin() const;

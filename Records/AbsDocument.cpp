@@ -8,11 +8,13 @@
 
 #include "AbsDocument.h"
 
+#include <utility>
+
 // Define class static members
 DirectoryComponentContainer AbsDocument::m_emptyContainer;
 
 AbsDocument::AbsDocument(std::string name, std::string dateTime)
-	: AbsDirectoryComponent(name), m_dateTime(dateTime)
+	: AbsDirectoryComponent(std::move(name)), m_dateTime(std::move(dateTime))
 {
 }
 
