@@ -15,8 +15,7 @@ GenericDocument* GenericDocument::clone() const
 	return new GenericDocument(*this); // À remplacer
 }
 
-GenericDocument::GenericDocument(std::string name, std::string dateTime, const char *string, const char *string1,
-                                 int i, float d) : AbsDocument(std::move(name), std::move(dateTime)) {
+GenericDocument::GenericDocument(std::string name, std::string dateTime) : AbsDocument(std::move(name), std::move(dateTime)) {
 }
 
 
