@@ -3,6 +3,7 @@
 
 #include "Directory.h"
 #include "AbsDocument.h"
+#include "AbsInstanceVisitor.h"
 
 int Directory::m_indent = 0;
 
@@ -28,11 +29,19 @@ Directory* Directory::clone(void) const
 	return  new Directory(*this);
 }
 
+AbsDirectoryComponent& Directory::accept(AddAnnotationVisitor& v) const
+{
+	
+	return v.processDirectory(*this->clone());
+
+}
+
 AbsDirectoryComponent& Directory::addDirectoryComponent(const AbsDirectoryComponent& member)
 {
 	// À compléter pour construire par clonage une copie de l'objet reçu en paramètre
 	// et l'insérer dans le conteneur de documents. On retourne une référence à l'objet
 	// qui vient d'être inséré dans le conteneur.
+	
 	AbsDirectoryComponent* newElement = member.clone();
 	DirectoryComponentPtr newElementPtr(newElement);
 	m_documents.push_back(std::move(newElementPtr));
@@ -86,9 +95,9 @@ const AbsDocument* Directory::findDocument(std::string productName) const
 	// portant le nom reçu en argument. Si aucun document n'est trouvé, on retourne nullptr
 	const AbsDocument* foundDocument = nullptr;
 
-    for(const auto& element: m_documents) {
-        foundDocument = dynamic_cast<AbsDocument *>(element->clone());
-    }
+	for (const auto& element : m_documents) {
+		foundDocument = dynamic_cast<AbsDocument*>(element->clone());
+	}
 	return foundDocument;
 }
 

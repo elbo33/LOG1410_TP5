@@ -6,6 +6,8 @@
 ///////////////////////////////////////////////////////////
 
 #include "Artifact.h"
+#include "AddAnnotationVisitor.h"
+#include "AbsInstanceVisitor.h"
 
 #include <utility>
 
@@ -18,6 +20,11 @@ Artifact* Artifact::clone() const
 {
 	// À compléter pour construire un nouvel objet Artifact en appelant le constructeur de copie
 	return new Artifact(*this); // À remplacer
+}
+
+void Artifact::accept(AbsInstanceVisitor& v)
+{
+	v.processArtifact(*this->clone());
 }
 
 const AbsDirectoryComponent& Artifact::getDocument() const

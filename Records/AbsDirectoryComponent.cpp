@@ -2,5 +2,7 @@
 
 std::ostream& operator<<(std::ostream & o, const AbsDirectoryComponent & dc)
 {
-	return dc.printToStream(o);
+	
+
+	return (dc.clone() == nullptr) ? dc.printToStream(o) : o;
 }

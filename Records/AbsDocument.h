@@ -10,6 +10,7 @@
 #define _AbsDocument_Header_
 
 #include "AbsDirectoryComponent.h"
+#include "AddAnnotationVisitor.h"
 
 class AbsDocument : public AbsDirectoryComponent
 {

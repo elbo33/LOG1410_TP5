@@ -9,6 +9,7 @@
 
 #include <utility>
 #include "Directory.h"
+#include "AbsInstanceVisitor.h"
 
 Instance::Instance(std::string name)
     : AbsInstanceComponent(std::move(name))
@@ -32,6 +33,12 @@ Instance* Instance::clone() const
 	// À compléter pour construire un nouvel objet Instance en appelant le constructeur de copie
 	return new Instance(*this); // À remplacer
 }
+
+void Instance::accept(AbsInstanceVisitor& v)
+
+{
+	v.processInstance(*this->clone());
+};
 
 
 InstanceComponentIterator Instance::begin() {
